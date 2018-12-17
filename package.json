@@ -1,6 +1,6 @@
 {
   "name": "yemit",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Script for MIT Manipal peeps to check how doomed they are.",
   "main": "index.js",
   "scripts": {
