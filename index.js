@@ -1,3 +1,5 @@
+const fs = require('fs')
+const utils = require('utils')
 const casper = require('casper').create({
     verbose: true
 });
@@ -18,6 +20,7 @@ casper.start(loginUrl, function () {
     },
     function() {
         casper.log('Some error occurred. Check your internet connection', 'error')
+        casper.exit()
     },
     5000)
 })
@@ -71,7 +74,9 @@ casper.then(function() {
         this.echo("Attendance found", 'INFO')
         var attendance = []
         attendance = this.evaluate(getData)
-        this.echo(JSON.stringify(attendance))
+        var stringData = JSON.stringify(attendance)
+        fs.write('attendance.json', stringData, 'w')
+        this.echo(stringData)
     },
     function() {
         this.echo("Attendance not found")
