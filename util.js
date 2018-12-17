@@ -75,6 +75,10 @@ casper.then(function() {
         var attendance = []
         attendance = this.evaluate(getData)
         var stringData = JSON.stringify(attendance)
+        var currentFile = require('system').args[3]
+        var curFilePath = fs.absolute(currentFile).split('/')
+        curFilePath.pop();
+        fs.changeWorkingDirectory(curFilePath.join('/'))
         if(!fs.exists(fs.workingDirectory + '/attendance.json')) {
             fs.touch(fs.workingDirectory + '/attendance.json')
         }
