@@ -1,4 +1,4 @@
-const data = require('./attendance.json')
+const data = require(__dirname + '/attendance.json')
 const Table = require('cli-table')
 
 const table = new Table({
