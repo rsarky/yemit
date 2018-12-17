@@ -1,14 +1,25 @@
-const casper = require('casper').create();
+const casper = require('casper').create({
+    verbose: true
+});
 if(casper.cli.has('username') && casper.cli.has('password')) {
     const username = casper.cli.get('username')
     const password = casper.cli.get('password')
 } else {
-    casper.exit()
+    casper.log('Usage casperjs index.js --username=<username> --password=<password>', 'error')
+    casper.exit(1)
 }
 const loginUrl = 'https://slcm.manipal.edu/loginForm.aspx'
 const acadUrl  = 'https://slcm.manipal.edu/Academics.aspx'
+
 casper.start(loginUrl, function () {
-    this.waitForSelector('div.login_form')
+    this.waitForSelector('div.login_form',
+    function() {
+        this.echo('Login Page opened successfully.', 'INFO')
+    },
+    function() {
+        casper.log('Some error occurred. Check your internet connection', 'error')
+    },
+    5000)
 })
 
 casper.then(function() {
@@ -18,29 +29,26 @@ casper.then(function() {
     this.fillSelectors('div.form-group.mt-35.mb-20 + div.form-group', {
         'input[name="txtpassword"]': password
     }, false)
-})
-
-casper.then(function() {
     this.click('input[value="Sign in"]')
 })
 
 casper.then(function() {
     this.waitForSelector('a[href="Academics.aspx"]',
     function () {
-        this.echo("Signed in")
-        this.echo(this.getCurrentUrl())
+        this.echo("Signed in", 'INFO')
     },
     function () {
-        this.echo("Did not load")
+        casper.log('Sign In Failed', 'error')
+        this.exit()
     },
     5000)
 })
 
 casper.thenOpen(acadUrl, function () {
     if(this.getCurrentUrl() === acadUrl) {
-        this.echo("Academics page opened successfully.")
+        this.echo("Academics page opened successfully.", 'INFO')
     } else {
-        this.echo("Error occurred.")
+        casper.log("Some Error occurred.", 'error')
     }
 })
 
@@ -60,7 +68,7 @@ function getData() {
 }
 casper.then(function() {
     this.waitForSelector('#tblAttendancePercentage tbody tr', function() {
-        this.echo("Attendance found")
+        this.echo("Attendance found", 'INFO')
         var attendance = []
         attendance = this.evaluate(getData)
         this.echo(JSON.stringify(attendance))
