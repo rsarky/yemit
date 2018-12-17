@@ -76,7 +76,6 @@ casper.then(function() {
         attendance = this.evaluate(getData)
         var stringData = JSON.stringify(attendance)
         fs.write('attendance.json', stringData, 'w')
-        this.echo(stringData)
     },
     function() {
         this.echo("Attendance not found")
