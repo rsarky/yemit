@@ -13,5 +13,9 @@
     "cli-table": "^0.3.1",
     "underscore": "^1.9.1"
   },
-  "bin": "./run.sh"
+  "bin": "./run.sh",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/rsarky/yemit"
+  }
 }
