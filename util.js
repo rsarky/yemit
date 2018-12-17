@@ -75,6 +75,9 @@ casper.then(function() {
         var attendance = []
         attendance = this.evaluate(getData)
         var stringData = JSON.stringify(attendance)
+        if(!fs.exists('attendance.json')) {
+            fs.touch('attendance.json')
+        }
         fs.write('attendance.json', stringData, 'w')
     },
     function() {
