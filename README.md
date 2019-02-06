@@ -23,7 +23,8 @@ Accessing [SLCM](slcm.manipal.edu) to see my attendance everytime seemed a bit t
 - Navigates to required page.
 - Scrapes the data.
 
-:red_circle: **NOTE** : yemit is an unofficial app, made in **no** association with SLCM or MIT, but it is dependant on SLCM to provide its service. This means that if SLCM is down or they decide to modify the website yemit will break. For the latter case it will hopefully be fixed asap.
+:red_circle: **NOTE** : yemit is an unofficial app, made in **no** association with SLCM or MIT, but it is dependant on SLCM to provide its service.  
+This means that if SLCM is down or they decide to modify the website yemit will break. For the latter case it will hopefully be fixed asap.
 
 ## Contributing
 
